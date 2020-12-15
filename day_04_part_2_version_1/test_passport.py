@@ -82,7 +82,6 @@ class PassportTest(unittest.TestCase):
         actual = p.validate_issue_year()
         self.assertTrue(actual)
 
-
     # eyr (Expiration Year) - four digits; at least 2020 and at most 2030.
 
     def test_validate_expiration_year_valid(self):
@@ -100,11 +99,42 @@ class PassportTest(unittest.TestCase):
         actual = p.validate_expiration_year()
         self.assertTrue(actual)
 
+    # hgt (Height) - a number followed by either cm or in:
+    # If cm, the number must be at least 150 and at most 193.
+    # If in, the number must be at least 59 and at most 76.
+
+    def test_validate_height_valid_cm(self):
+        p = Passport(data='hgt:160cm')
+        actual = p.validate_height()
+        self.assertTrue(actual)
+
+    def test_validate_height_invalid_cm(self):
+        p = Passport(data='hgt:140cm')
+        actual = p.validate_height_dev()
+        self.assertFalse(actual)
+
+    def test_validate_height_valid_in(self):
+        p = Passport(data='hgt:59in')
+        actual = p.validate_height_dev()
+        self.assertTrue(actual)
+
+    def test_validate_height_invalid_in(self):
+        p = Passport(data='hgt:58in')
+        actual = p.validate_height_dev()
+        self.assertFalse(actual)
+
+    def test_validate_height_invalid_string(self):
+        p = Passport(data='hgt:58sin')
+        actual = p.validate_height_dev()
+        self.assertFalse(actual)
+
+    def test_validate_height_valid_missing_height(self):
+        p = Passport(data='place_holder:1234')
+        actual = p.validate_height()
+        self.assertTrue(actual)
 
 
-# hgt (Height) - a number followed by either cm or in:
-# If cm, the number must be at least 150 and at most 193.
-# If in, the number must be at least 59 and at most 76.
+
 # hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f.
 # ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth.
 # pid (Passport ID) - a nine-digit number, including leading zeroes.

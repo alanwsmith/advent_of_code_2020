@@ -1,13 +1,4 @@
-# Validation rules
-# byr (Birth Year) - four digits; at least 1920 and at most 2002.
-# iyr (Issue Year) - four digits; at least 2010 and at most 2020.
-# eyr (Expiration Year) - four digits; at least 2020 and at most 2030.
-# hgt (Height) - a number followed by either cm or in:
-# If cm, the number must be at least 150 and at most 193.
-# If in, the number must be at least 59 and at most 76.
-# hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f.
-# ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth.
-# pid (Passport ID) - a nine-digit number, including leading zeroes.
+import re
 
 class Passport:
 
@@ -51,6 +42,30 @@ class Passport:
                 return False
         else:
             return True
+
+    def validate_height(self):
+        return self.validate_height_dev()
+        return True
+
+    def validate_height_dev(self):
+        if 'hgt' in self.details.keys():
+            match = re.search(r'^(\d+)(in|cm)$', self.details['hgt'])
+            if match:
+                numeral = int(match.group(1))
+                ruler = match.group(2)
+                if ruler == 'cm':
+                    if 150 <= numeral <= 193:
+                        return True
+                elif ruler == 'in':
+                    if 59 <= numeral <= 76:
+                        return True
+                else:
+                    return False
+            else:
+                return False
+        else:
+            return True
+
 
     def validate_issue_year(self):
         if 'iyr' in self.details:
