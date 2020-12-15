@@ -83,10 +83,25 @@ class PassportTest(unittest.TestCase):
         self.assertTrue(actual)
 
 
+    # eyr (Expiration Year) - four digits; at least 2020 and at most 2030.
+
+    def test_validate_expiration_year_valid(self):
+        p = Passport(data='eyr:2020')
+        actual = p.validate_expiration_year()
+        self.assertTrue(actual)
+
+    def test_validate_expiration_year_invalid(self):
+        p = Passport(data='eyr:2019')
+        actual = p.validate_expiration_year()
+        self.assertFalse(actual)
+
+    def test_validate_expiration_year_valid_if_missing(self):
+        p = Passport(data='place_holder:1234')
+        actual = p.validate_expiration_year()
+        self.assertTrue(actual)
 
 
 
-# eyr (Expiration Year) - four digits; at least 2020 and at most 2030.
 # hgt (Height) - a number followed by either cm or in:
 # If cm, the number must be at least 150 and at most 193.
 # If in, the number must be at least 59 and at most 76.

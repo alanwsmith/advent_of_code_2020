@@ -62,3 +62,12 @@ class Passport:
         else:
             return True
 
+    def validate_expiration_year(self):
+        if 'eyr' in self.details:
+            year = int(self.details['eyr'])
+            if 2020 <= year <= 2030:
+                return True
+            else:
+                return False
+        else:
+            return True
