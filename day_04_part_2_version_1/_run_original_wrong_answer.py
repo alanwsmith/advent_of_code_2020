@@ -60,7 +60,7 @@ def check_if_valid(fields):
             if int(height_match.group(1)) > 76:
                 return False
 
-        print(height_match.group(1))
+        #print(height_match.group(1))
 
     # hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f.
     hair_match = re.search(r'#([0-9a-f]{6})$', details['hcl'])
@@ -84,7 +84,7 @@ def check_if_valid(fields):
     return True
 
 
-with open('input.txt') as _file:
+with open('passport_validator_input.txt') as _file:
     input_data = _file.read()
 
 passports = re.split(r"\n\n", input_data)

@@ -25,14 +25,6 @@ class Passport:
             else:
                 return True
 
-    def is_passport_valid(self):
-        if not self.confirm_the_keys():
-            return False
-        elif not self.validate_birth_year():
-            return False
-        else:
-            return True
-
     def validate_birth_year(self):
         if 'byr' in self.details:
             year = int(self.details['byr'])
@@ -43,11 +35,26 @@ class Passport:
         else:
             return True
 
-    def validate_height(self):
-        return self.validate_height_dev()
-        return True
+    def validate_eye_color(self):
+        if 'ecl' in self.details.keys():
+            if re.search(r'^(amb|blu|brn|gry|grn|hzl|oth)$', self.details['ecl']):
+                return True
+            else:
+                return False
+        else:
+            return True
 
-    def validate_height_dev(self):
+    def validate_hair_color(self):
+        if 'hcl' in self.details:
+            match = re.search(r'^#[a-f0-9]{6}$', self.details['hcl'])
+            if match:
+                return True
+            else:
+                return False
+        else:
+            return True
+
+    def validate_height(self):
         if 'hgt' in self.details.keys():
             match = re.search(r'^(\d+)(in|cm)$', self.details['hgt'])
             if match:
@@ -65,7 +72,6 @@ class Passport:
                 return False
         else:
             return True
-
 
     def validate_issue_year(self):
         if 'iyr' in self.details:
@@ -86,3 +92,33 @@ class Passport:
                 return False
         else:
             return True
+
+    def validate_passport_id(self):
+        if 'pid' in self.details.keys():
+            if re.search(r'^\d{9}$', self.details['pid']):
+                return True
+            else:
+                return False
+        else:
+            return True
+
+    def is_passport_valid(self):
+        if not self.confirm_the_keys():
+            return False
+        elif not self.validate_birth_year():
+            return False
+        elif not self.validate_expiration_year():
+            return False
+        elif not self.validate_eye_color():
+            return False
+        elif not self.validate_issue_year():
+            return False
+        elif not self.validate_passport_id():
+            return False
+        elif not self.validate_hair_color():
+            return False
+        elif not self.validate_height():
+            return False
+        else:
+            return True
+

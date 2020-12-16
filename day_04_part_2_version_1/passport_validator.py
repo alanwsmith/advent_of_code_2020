@@ -1,13 +1,7 @@
-# byr - Required - (Birth Year)
-# iyr - Required -  (Issue Year)
-# eyr - Required -  (Expiration Year)
-# hgt - Required -  (Height)
-# hcl - Required -  (Hair Color)
-# ecl - Required -  (Eye Color)
-# pid - Required -  (Passport ID)
-# cid - Optional -  (Country ID)
+#!/usr/bin/env python3
 
 from passport import Passport
+
 
 class PassportValidator:
 
