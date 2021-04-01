@@ -1,0 +1,11 @@
+pid:2306523501
+eyr:2032 hcl:z ecl:brn
+cid:266 hgt:151in iyr:2024
+byr:2008
+
+hcl:#a97842 hgt:191cm eyr:2025 ecl:gry byr:1923 pid:574171850 iyr:2019
+
+hgt:140
+iyr:1987 byr:2003
+eyr:2013 cid:242 hcl:z
+ecl:#19177c pid:150cm
